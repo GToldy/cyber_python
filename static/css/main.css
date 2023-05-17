@@ -1,3 +1,15 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background: #24292E;
+  color: #EDEFF2;
+}
+
+header h1 {
+  margin-left: 1rem;
+  font-family: Arial;
+}
 
 .button-4 {
   appearance: none;
