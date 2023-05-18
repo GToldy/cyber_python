@@ -1,0 +1,105 @@
+:root[data-theme="light"] {
+  --color-secondary: hsl(207, 10%, 36%);
+  --color-primary: hsl(0, 0%, 100%);
+  --color-button-primary: hsl(332, 40%, 49%);
+  --color-button-secondary: hsl(195, 15%, 95%);
+  --color-accent: hsl(15, 68%, 71%);
+}
+
+:root[data-theme="dark"] {
+  --color-primary: hsl(244, 81%, 4%);
+  --color-secondary: hsl(245, 87%, 97%);
+  --color-button-primary: hsl(275, 82%, 59%);
+  --color-button-secondary: hsl(0, 100%, 100%);
+  --color-accent: hsl(305, 82%, 59%);
+}
+
+:root {
+    --head-foot-height: 6rem;
+}
+
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+    color: var(--color-secondary);
+    background-color: var(--color-primary)
+}
+
+header {
+    padding: 1rem 3rem;
+    background-color: var(--color-secondary) !important;
+    position: sticky !important;
+    top: 0 !important
+}
+
+#site-logo img {
+    width: 4rem;
+}
+
+li {
+    list-style: none;
+}
+
+li a {
+    text-decoration: none;
+    padding: .5rem .75rem;
+    margin: .5rem;
+    background-color: var(--color-button-secondary);
+    border-radius: .5rem;
+    color: var(--color-secondary);
+}
+
+footer {
+    background-color: var(--color-primary) !important;
+    height: var(--head-foot-height) !important;
+    position: fixed !important;
+    bottom: 0 !important
+}
+
+.content {
+    padding: 1.5rem 0 calc(var(--head-foot-height) + 1.5rem) !important;
+    border: 1px solid !important;
+}
+
+#main-container {
+    position: relative;
+}
+
+.container { margin: auto !important}
+.w-100 { width: 100vw !important }
+.w-90 { width: 90vw !important }
+.w-80 { width: 80vw !important }
+.w-70 { width: 70vw !important }
+.w-60 { width: 60vw !important }
+.w-50 { width: 50vw !important }
+.w-40 { width: 40vw !important }
+.w-30 { width: 30vw !important }
+.w-20 { width: 20vw !important }
+.w-10 { width: 10vw !important }
+
+
+
+/*-----FLEXBOX-----*/
+.d-flex { display: flex !important}
+.flex-wrap { flex-wrap: wrap !important}
+.row { flex-direction: row !important}
+.row-rev { flex-direction: row-reverse !important}
+.col { flex-direction: column !important}
+.col-rev { flex-direction: column-reverse !important}
+.justify-center { justify-content: center !important}
+.justify-flex-end { justify-content: flex-end !important}
+.justify-between { justify-content: space-between !important}
+.justify-around { justify-content: space-around !important}
+.justify-evenly { justify-content: space-evenly !important}
+.align-flex-end { align-items: flex-end !important}
+.align-center { align-items: center !important}
+
+/*-----BUTTON-----*/
+.btn-primary {
+  background-color: var(--color-button-primary) !important;
+  color: var(--color-primary) !important
+}

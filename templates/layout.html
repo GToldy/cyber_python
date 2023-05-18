@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <script src="../static/js/themer.js" defer></script>
+</head>
+<body>
+    <div id="main-container">
+        <div class="container">
+            {% include 'header.html' %}
+            <main class="container w-90 content">
+                {% block content %}{% endblock %}
+            </main>
+            {% include 'footer.html' %}
+        </div>
+    </div>
+</body>
+</html>
