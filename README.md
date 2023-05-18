@@ -1,5 +1,3 @@
-# cyber_python_rougelike
-
 # Project Idea: Intrusion Detection System (IDS)
 
 An Intrusion Detection System (IDS) is a software or hardware solution that monitors network traffic for suspicious activities or known attack patterns. It helps identify potential security breaches and alerts system administrators for further investigation. For this project, you can develop a basic IDS using Python. Here's a breakdown of the project:
@@ -35,5 +33,3 @@ Remember, this project is just a starting point, and you can customize and exten
 
 
 # human face detection
-
-# adblocker
