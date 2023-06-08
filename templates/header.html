@@ -1,0 +1,18 @@
+<header class="w-100">
+    <nav class="d-flex row justify-between align-center">
+        <span id="site-logo" class="d-flex justify-center align-center">
+            <a href="{{ url_for('index') }}">
+                <img src="../static/img/cyberry_c.png" width="100%" />
+            </a>
+            <h1>Cyberry</h1>
+        </span>
+        <ul>
+            <li class="d-flex row justify-flex-end">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('face_recognition') }}">FaceRec</a>
+                <a href="#">Sign up</a>
+                <a href="#">Log in</a>
+            </li>
+        </ul>
+    </nav>
+</header>
