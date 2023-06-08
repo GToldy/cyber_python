@@ -2,24 +2,15 @@ import os
 import numpy as np
 import cv2 as cv
 
-haar_cascade = cv.CascadeClassifier('haar_cascade.xml')
 
-
-people = []
-DIR = 'FaceTrainingPhotos'
-
-features = []
-labels = []
-
-
-def get_photos():
-    for i in os.listdir(DIR):
+def get_photos(path, people):
+    for i in os.listdir(path):
         people.append(i)
 
 
-def get_faces_from_photos():
+def get_faces_from_photos(directory, people, haar_cascade, features, labels):
     for person in people:
-        path = os.path.join(DIR, person)
+        path = os.path.join(directory, person)
         label = people.index(person)
 
         for img in os.listdir(path):
@@ -48,7 +39,14 @@ def train(face_features, face_labels):
     np.save('labels.npy', labels)
 
 
-get_photos()
-get_faces_from_photos()
-train(features, labels)
-print("Train completed")
+def faces_train():
+    haar_cascade = cv.CascadeClassifier('haar_cascade.xml')
+    people = []
+    path = 'logic/FaceTrainingPhotos'
+    features = []
+    labels = []
+
+    get_photos(path, people)
+    get_faces_from_photos(path, people, haar_cascade, features, labels)
+    train(features, labels)
+    print("Train completed")
