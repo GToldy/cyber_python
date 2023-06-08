@@ -3,4 +3,13 @@
 
 {% block content %}
     <h1>Face recognition</h1>
+
+    <form action="/face-recognition" method="POST" enctype="multipart/form-data">
+
+        <div class="form-input">
+            <input type="file" name="image" id="image-input" accept=".jpg,.jpeg,.png,.bmp">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
 {% endblock %}

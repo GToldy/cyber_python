@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-    <div class="form-input">
-        <input type="file" name="image" id="image-input" accept=".jpg,.jpeg,.png">
-    </div>
-    <br>
-    <button class="button-4" type="button">Submit</button>
-</body>
-</html>
+{% extends 'layout.html' %}
+{% block title %}Cyberry Home{% endblock %}
+
+{% block content %}
+<div class="form-input">
+    <input type="file" name="image" id="image-input" accept=".jpg,.jpeg,.png">
+</div>
+<br>
+<button class="button-4" type="button">Submit</button>
+{% endblock %}
