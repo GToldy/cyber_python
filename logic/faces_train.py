@@ -40,7 +40,7 @@ def train(face_features, face_labels):
 
 
 def faces_train():
-    haar_cascade = cv.CascadeClassifier('haar_cascade.xml')
+    haar_cascade = cv.CascadeClassifier('logic/haar_cascade.xml')
     people = []
     path = 'logic/FaceTrainingPhotos'
     features = []

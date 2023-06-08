@@ -18,7 +18,9 @@ def index():  # put application's code here
 
 
 @app.route('/face-recognition', methods=['GET', 'POST'])
-def face_recognition():
+def face_tracking():
+    text = ""
+    file = ""
     if request.method == 'POST':
         if 'image' not in request.files:
             flash('No file part')
@@ -29,10 +31,11 @@ def face_recognition():
             if image.filename != '':
                 image.save(join(UPLOAD_FOLDER, secure_filename(image_file)))
                 faces_train.faces_train()
-                face_recognition.recognise_uploaded_picture(UPLOAD_FOLDER)
+                confidence_text, file_name = face_recognition.recognise_uploaded_picture(f'{UPLOAD_FOLDER}/{image_file}')
+                return render_template('face-rec.html', text=confidence_text, file=file_name)
             else:
-                redirect('face-rec.html')
-    return render_template('face-rec.html')
+                return redirect('face-rec.html')
+    return render_template('face-rec.html', text="", file="")
 
 
 if __name__ == '__main__':

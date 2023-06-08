@@ -12,4 +12,10 @@
 
         <button type="submit">Submit</button>
     </form>
+    {% if text != "" %}
+    <div>
+        <h3>{{ text }}</h3>
+        <img alt="Recognised picture"  src="{{ file }}">
+    </div>
+    {% endif %}
 {% endblock %}
