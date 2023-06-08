@@ -3,9 +3,11 @@ import numpy as np
 
 haar_cascade = cv.CascadeClassifier('haar_cascade.xml')
 
-people = []
 
-img = cv.imread('FaceValidationPhotos/FeiFeiLi_validation.jpeg')
+def recognise_uploaded_picture(path):
+    img = cv.imread(path)
+    predict_person(img)
+    return img
 
 
 def get_trained_data():
@@ -16,8 +18,8 @@ def get_trained_data():
     return face_recognizer
 
 
-def prepare_picture_for_detection():
-    gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+def prepare_picture_for_detection(image):
+    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     return gray
 
 
@@ -28,21 +30,15 @@ def write_result_to_picture(img, confidence_of_value, label, x, y, w, h):
     cv.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 
-def predict_person():
+def predict_person(image):
     face_recogniser = get_trained_data()
-    prepared_img = prepare_picture_for_detection()
-    faces_rectangle = haar_cascade.detectMultiScale(img, 1.1, 5)
+    prepared_img = prepare_picture_for_detection(image)
+    faces_rectangle = haar_cascade.detectMultiScale(image, 1.1, 5)
 
     for (x, y, w, h) in faces_rectangle:
         faces_of_interest = prepared_img[y:y + w, x:x + h]
 
         label, confidence_of_value = face_recogniser.predict(faces_of_interest)
 
-        write_result_to_picture(img,  confidence_of_value, label, x, y, w, h)
+        write_result_to_picture(image,  confidence_of_value, label, x, y, w, h)
 
-
-predict_person()
-
-cv.imshow('Detect face', img)
-
-cv.waitKey(0)

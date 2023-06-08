@@ -1,5 +1,6 @@
 from os.path import join, dirname, realpath
 import time
+from logic import faces_train, face_recognition
 
 from flask import Flask, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
@@ -27,6 +28,8 @@ def face_recognition():
             image_file = f'{time.time()}_{image.filename}'
             if image.filename != '':
                 image.save(join(UPLOAD_FOLDER, secure_filename(image_file)))
+                faces_train.faces_train()
+                face_recognition.recognise_uploaded_picture(UPLOAD_FOLDER)
             else:
                 redirect('face-rec.html')
     return render_template('face-rec.html')
