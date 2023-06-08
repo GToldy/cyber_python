@@ -8,7 +8,7 @@ import util
 
 app = Flask(__name__)
 app.secret_key = util.generate_random_secret_key()
-UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'static\\img')
+UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'static/img')
 
 
 @app.route('/')
