@@ -29,10 +29,10 @@ def face_detection():
         else:
             image = request.files['image']
             image_file = f'{time.time()}_{image.filename}'
-            image_path = f'/home/polandrea/Documents/Github/CyberSec/cyber_python/static/img/uploaded/{image_file}'
-            image.save(os.path.join(r'/home/polandrea/Documents/Github/CyberSec/cyber_python/static/img/uploaded', image_file))
+            image_path = '{0}/{1}'.format('./static/img/uploaded', image_file)
+            image.save(image_path)
             logic.face_detection.face_detect(image_path)
-        return render_template('face-detect.html')
+        return render_template('face-detect.html', image=image_file)
     return render_template('index.html')
 
 

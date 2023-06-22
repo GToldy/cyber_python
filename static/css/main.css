@@ -1,7 +1,51 @@
-.header {
-  display: flex;
-  align-content: space-between;
-  margin-bottom: 30px;
+header {
+    padding: 1rem 3rem;
+    background-color: var(--color-secondary) !important;
+    position: sticky !important;
+    top: 0 !important
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav span {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.face-detect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#site-logo img {
+    width: 4rem;
+}
+
+h1 {
+    color: var(--color-primary) !important;
+    font-size: 3rem;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    padding: .5rem .75rem;
+    margin: .5rem;
 }
 
 .button-52 {
