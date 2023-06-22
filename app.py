@@ -1,6 +1,9 @@
 from os.path import join, dirname, realpath
 import time
-from logic import faces_train, face_recognition
+import os
+
+import logic.face_detection
+from logic import face_detection
 
 from flask import Flask, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
@@ -17,8 +20,8 @@ def index():  # put application's code here
     return render_template('index.html')
 
 
-@app.route('/face-recognition', methods=['GET', 'POST'])
-def face_recognition():
+@app.route('/face-detection', methods=['GET', 'POST'])
+def face_detection():
     if request.method == 'POST':
         if 'image' not in request.files:
             flash('No file part')
@@ -26,13 +29,12 @@ def face_recognition():
         else:
             image = request.files['image']
             image_file = f'{time.time()}_{image.filename}'
-            if image.filename != '':
-                image.save(join(UPLOAD_FOLDER, secure_filename(image_file)))
-                faces_train.faces_train()
-                face_recognition.recognise_uploaded_picture(UPLOAD_FOLDER)
-            else:
-                redirect('face-rec.html')
-    return render_template('face-rec.html')
+            image_path = f'/home/polandrea/Documents/Github/CyberSec/cyber_python/static/img/uploaded/{image_file}'
+            image.save(os.path.join(r'/home/polandrea/Documents/Github/CyberSec/cyber_python/static/img/uploaded', image_file))
+            logic.face_detection.face_detect(image_path)
+        return render_template('face-detect.html')
+    return render_template('index.html')
+
 
 
 if __name__ == '__main__':
