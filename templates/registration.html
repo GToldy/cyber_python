@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+    <h1>Registration</h1>
+
+    <form action="/registration" method="POST">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <label for="password-check">Password again:</label>
+            <input type="password" id="password-check" name="password-check" required>
+        </div>
+        <div>
+            <label for="face-recognition">Face recognition</label>
+            <input type="checkbox" id="face-recognition" name="face-recognition" value="True">
+        </div>
+        <div>
+            <button type="submit" value="Register">Register</button>
+        </div>
+    </form>
+{% endblock %}
