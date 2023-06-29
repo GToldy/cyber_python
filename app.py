@@ -1,14 +1,9 @@
 from os.path import join, dirname, realpath
 import time
-import os
-
-import logic.face_detection
-from logic import face_detection
+import util
+import face_recognition
 
 from flask import Flask, render_template, request, redirect, flash
-from werkzeug.utils import secure_filename
-
-import util
 
 app = Flask(__name__)
 app.secret_key = util.generate_random_secret_key()
@@ -29,11 +24,12 @@ def face_detection():
         else:
             image = request.files['image']
             image_file = f'{time.time()}_{image.filename}'
-            image_path = '{0}/{1}'.format('./static/img/uploaded', image_file)
+            image_path = '{0}/{1}'.format('/home/zsofi/codecool/CyberSec/cyber_python/static/img/uploaded', image_file)
             image.save(image_path)
             logic.face_detection.face_detect(image_path)
         return render_template('face-detect.html', image=image_file)
     return render_template('index.html')
+
 
 
 
