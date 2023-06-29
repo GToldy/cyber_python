@@ -1,8 +1,5 @@
 from os.path import join, dirname, realpath
-import time
-import util
-import face_recognition
-
+from util import util
 from flask import Flask, render_template, request, redirect, flash
 
 app = Flask(__name__)
@@ -15,22 +12,19 @@ def index():  # put application's code here
     return render_template('index.html')
 
 
-@app.route('/face-detection', methods=['GET', 'POST'])
-def face_detection():
-    if request.method == 'POST':
-        if 'image' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        else:
-            image = request.files['image']
-            image_file = f'{time.time()}_{image.filename}'
-            image_path = '{0}/{1}'.format('/home/zsofi/codecool/CyberSec/cyber_python/static/img/uploaded', image_file)
-            image.save(image_path)
-            logic.face_detection.face_detect(image_path)
-        return render_template('face-detect.html', image=image_file)
-    return render_template('index.html')
+@app.route('/face-recognition', methods=['GET', 'POST'])
+def face_recognition():
+    pass
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template('login.html')
+
+
+@app.route('/registration', methods=['GET', 'POST'])
+def registration():
+    return render_template('registration.html')
 
 
 if __name__ == '__main__':
