@@ -1,0 +1,41 @@
+ALTER TABLE IF EXISTS ONLY "Users"
+DROP CONSTRAINT IF EXISTS pk_users_id CASCADE;
+
+
+ALTER TABLE IF EXISTS ONLY "FaceData"
+DROP CONSTRAINT IF EXISTS pk_facedata_id CASCADE;
+
+
+ALTER TABLE IF EXISTS ONLY "FaceData"
+DROP CONSTRAINT IF EXISTS fk_users_id CASCADE;
+
+
+DROP TABLE IF EXISTS "Users";
+
+
+CREATE TABLE "Users" (
+    "id" SERIAL NOT NULL,
+    "username" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "face_recognition" BOOLEAN DEFAULT FALSE
+);
+
+
+DROP TABLE IF EXISTS "FaceData";
+
+
+CREATE TABLE "FaceData" (
+    "id" SERIAL NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "data" BYTEA
+);
+
+
+ALTER TABLE ONLY "Users" ADD CONSTRAINT pk_users_id PRIMARY KEY (id);
+
+
+ALTER TABLE ONLY "FaceData" ADD CONSTRAINT pk_facedata_id PRIMARY KEY (id);
+
+
+ALTER TABLE IF EXISTS "FaceData" ADD CONSTRAINT fk_users_id
+FOREIGN KEY (user_id) REFERENCES "Users" (id)
