@@ -256,3 +256,12 @@ body {
   border: 0;
   transition: all .2s ease;
 }
+
+.intro {
+  padding: 1rem 3rem;
+  background-color: var(--color-secondary) !important;
+  position: sticky !important;
+  border: 1px solid black;
+  margin-top: 1rem;
+}
+
