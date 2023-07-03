@@ -1,5 +1,5 @@
 from psycopg2 import sql
-import connection
+from data.connection import connection_handler
 import bcrypt
 
 
@@ -21,3 +21,23 @@ def verify_password(plain_text_password, hashed_password):
 #     ORDER BY {} {};"""
 #     cursor.execute(sql.SQL(query).format(sql.Identifier(order_by), sql.SQL(order_direction)))
 #     return cursor.fetchall()
+
+
+@connection_handler
+def create_user(cursor, userdata):
+    query = """
+    INSERT INTO "Users"
+    VALUES (default, %(username)s,%(password)s, %(face_recognition)s);
+    """
+    cursor.execute(query, {'username': userdata['username'], 'password': userdata['password'],
+                           'face_recognition': userdata['face_recognition']})
+
+
+@connection_handler
+def get_all_users(cursor):
+    query = """
+    SELECT * FROM "Users";
+    """
+    cursor.execute(query)
+    return cursor.fetchall()
+
