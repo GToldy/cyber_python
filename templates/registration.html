@@ -4,7 +4,18 @@
 {% block content %}
     <h1>Registration</h1>
 
-    <form action="/api/users" method="POST">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <p class="flash-messages">
+                {% for category, message in messages %}
+                    <span class="flash-{{ category }}">{{ message }}</span>
+                {% endfor %}
+                <span data-flash-message-close onclick="document.querySelector('.flash-messages').style.display = 'none'">X</span>
+            </p>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/registration" method="POST">
         <div>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -18,8 +29,11 @@
             <input type="password" id="password-check" name="password-check" required>
         </div>
         <div>
-            <label for="face-recognition">Face recognition</label>
-            <input type="checkbox" id="face-recognition" name="face-recognition" value="True">
+            <span>Face recognition:</span>
+            <label for="face-recognition">Yes</label>
+            <input type="radio" id="face-recognition" name="face-recognition" value="True" >
+            <label for="face-recognition">No</label>
+            <input type="radio" id="face-recognition" name="face-recognition" value="False" >
         </div>
         <div>
             <button type="submit" value="Register">Register</button>

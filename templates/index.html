@@ -2,28 +2,19 @@
 {% block title %}Cyberry Home{% endblock %}
 
 {% block content %}
-    <div class="face-detect">
-        {% if image %}
-            {% block detected_face %}{% endblock %}
-        {% else %}
-            <form action="/face-detection" method="post" enctype="multipart/form-data">
-                <label for="image-input">Select image:</label>
-                <input type="file" name="image" id="image-input" accept=".jpg,.jpeg,.png">
-                <input type="submit" value="Submit">
-            </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <p class="flash-messages">
+                {% for category, message in messages %}
+                    <span class="flash-{{ category }}">{{ message }}</span>
+                {% endfor %}
+                <span data-flash-message-close onclick="document.querySelector('.flash-messages').style.display = 'none'">X</span>
+            </p>
         {% endif %}
-    </div>
+    {% endwith %}
+
+    <h3>{{ 'No logged in user' if user is none else user }}</h3>
     <div>
-    {% if user_list|length >0 %}
-        <ul>
-        {% for user in user_list %}
-            <li>
-            {{ user['username'] }}
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        "No users yet"
-    {% endif %}
+
     </div>
 {% endblock %}
