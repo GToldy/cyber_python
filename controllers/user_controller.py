@@ -11,15 +11,14 @@ def get_user_by_id(user_id):
 
 
 def get_user_by_username(user_name):
-    print(manager.get_user_by_username(user_name))
     return manager.get_user_by_username(user_name)
+
 
 def create_user(user_data):
     is_verified, flash_message = util.verify_user_data(user_data)
     if is_verified:
         simple_user_data = util.unpacked_user_data(user_data)
         simple_user_data['password'] = security.hash_password(simple_user_data['password'])
-        print(simple_user_data)
         manager.create_user(simple_user_data)
         session['username'] = simple_user_data['username']
         flash(flash_message, 'info')

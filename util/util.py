@@ -1,9 +1,8 @@
-from flask import flash
-import string
 from functools import wraps
 from flask import jsonify
 
-from util.security import hash_password
+from controllers import user_controller
+from util.security import hash_password, verify_password
 
 
 def json_response(func):
@@ -15,12 +14,24 @@ def json_response(func):
 
 
 def verify_user_data(user_data):
-    if len(user_data['username']) < 3:
+    if 'username' in user_data and len(user_data['username']) < 3:
         return False, 'Username must be 3 characters or more'
-    elif user_data['password'] != user_data['password_check']:
+    elif 'password_check' in user_data and user_data['password'] != user_data['password_check']:
         return False, 'Passwords do not mach. Try again'
     else:
         return True, 'Registered successfully. Now you are logged in'
+
+
+def verify_login_data(user_data):
+    user = user_controller.get_user_by_username(user_data['username'])
+    if user is not None:
+        is_valid = verify_password(user_data['password'], user['password'])
+        if is_valid:
+            return True, user, 'Logged in successfully.'
+        else:
+            return False, None, 'Incorrect password. Try again'
+    else:
+        return False, None, 'Incorrect username. Try again'
 
 
 def unpacked_user_data(user_data):

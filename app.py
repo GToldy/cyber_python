@@ -1,11 +1,10 @@
 from os.path import join, dirname, realpath
 from flask import Flask, render_template, request, redirect, flash, url_for, session
-import data.data_manager as manager
 import secrets
 from dotenv import load_dotenv
 
 from controllers import user_controller
-from util.util import verify_user_data
+from util.util import verify_user_data, verify_login_data
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(24)
@@ -27,10 +26,14 @@ def face_recognition():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        print(request.form['username'])
-        user_data = user_controller.get_user_by_username(request.form['username'])
-        print(user_data, "userdata")
-        return redirect(url_for('user_profile', user_id=user_data['id']))
+        is_verified, user_data, flash_message = verify_login_data(request.form)
+        if is_verified:
+            session['username'] = user_data['username']
+            flash(flash_message, 'info')
+            return redirect(url_for('user_profile', user_id=user_data['id']))
+        else:
+            flash(flash_message, 'error')
+            return redirect(url_for('login'))
     return render_template('login.html')
 
 
@@ -44,8 +47,7 @@ def logout():
 def registration():
     if request.method == 'POST':
         user_controller.create_user(request.form)
-        print(request.form)
-        return redirect(url_for('index', user=request.form['username']))
+        return redirect(url_for('index'))
     return render_template('registration.html')
 
 
