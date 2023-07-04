@@ -28,4 +28,3 @@ git clone git@github.com:GToldy/cyber_python.git
 
 ## Usage
 While the service is running, go to "localhost:5000" in your browser to see the main page.
-...
