@@ -1,10 +1,11 @@
 from os.path import join, dirname, realpath
-from util import util
 from flask import Flask, render_template, request, redirect, flash, url_for, session
 import data.data_manager as manager
 import secrets
 from dotenv import load_dotenv
+
 from controllers import user_controller
+from util.util import verify_user_data
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(24)
@@ -26,7 +27,9 @@ def face_recognition():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        print(request.form['username'])
         user_data = user_controller.get_user_by_username(request.form['username'])
+        print(user_data, "userdata")
         return redirect(url_for('user_profile', user_id=user_data['id']))
     return render_template('login.html')
 
@@ -56,9 +59,14 @@ def user_profile(user_id):
 def edit_profile(user_id):
     user_data = user_controller.get_user_by_id(user_id)
     if request.method == 'POST':
-        print(user_id, request.form)
-        user_controller.update_user(user_id, request.form)
-        return redirect(url_for('user_profile', user_id=user_id))
+        is_verified, flash_message = verify_user_data(request.form)
+        if is_verified:
+            user_controller.update_user(user_id, request.form)
+            flash(flash_message, 'info')
+            return redirect(url_for('user_profile', user_id=user_id))
+        else:
+            flash(flash_message, 'error')
+            return redirect(url_for('edit_profile', user_id=user_id))
     return render_template('edit_profile.html', user=user_data)
 
 

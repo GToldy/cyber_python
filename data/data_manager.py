@@ -9,7 +9,7 @@ def create_user(cursor, userdata):
     """
     cursor.execute(query, {'username': userdata['username'],
                            'password': userdata['password'],
-                           'face_recognition': userdata['face-recognition']})
+                           'face_recognition': userdata['face_recognition']})
 
 
 @connection_handler
