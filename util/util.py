@@ -13,14 +13,14 @@ def json_response(func):
     return decorated_function
 
 
-def verify_user_data(user_data):
+def verify_user_data(session, user_data):
     if 'username' in user_data and len(user_data['username']) < 3:
         return False, 'Username must be 3 characters or more'
     elif 'password_check' in user_data and user_data['password'] != user_data['password_check']:
         return False, 'Passwords do not mach. Try again'
     else:
-        if 'id' in user_data:
-            return True, 'Logged in successfully'
+        if 'user_id' in session:
+            return True, 'Data changed successfully'
         return True, 'Registered successfully. Now you are logged in'
 
 

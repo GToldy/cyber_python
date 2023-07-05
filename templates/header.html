@@ -13,7 +13,7 @@
 {#            <li>#}
 {#                <a class="button-52" href="{{ url_for('face_recognition') }}">Face Recognition</a>#}
 {#            </li>#}
-            {% if session['username'] %}
+            {% if session.username %}
                 <li>
                     <a class="button-52" href="{{ url_for('user_profile', user_id=session.user_id) }}">Profile</a>
                 </li>
@@ -30,7 +30,9 @@
             {% endif %}
         </ul>
     </nav>
-    <div>
-        <span>{{ session.username }}</span>
-    </div>
+    {% if session.username %}
+        <div id="user-header">
+            <span id="username">{{ session.username }}</span>
+        </div>
+    {% endif %}
 </header>

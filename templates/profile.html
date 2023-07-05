@@ -16,7 +16,9 @@
     <div class="profile container">
         <div class="profile-header" style="display: flex; justify-content: space-between">
             <h1>{{ user['username'] }}</h1>
-            <a class="button-52" href="{{ url_for('edit_profile', user_id=user['id']) }}">Edit</a>
+            {% if user['id'] == session.user_id %}
+                <a class="button-52" href="{{ url_for('edit_profile', user_id=user['id']) }}">Edit</a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

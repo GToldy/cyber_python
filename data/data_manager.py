@@ -42,6 +42,15 @@ def get_user_by_username(cursor, user_name):
 
 
 @connection_handler
+def check_if_user_exists(cursor, user_name):
+    query = """
+        SELECT EXISTS(SELECT 1 FROM "Users" WHERE username = %(user_name)s);
+    """
+    cursor.execute(query, {'user_name': user_name})
+    return cursor.fetchone()['exists']
+
+
+@connection_handler
 def update_user(cursor, user_id, user_data):
     query = """
         UPDATE "Users" SET username = %(user_name)s, password = %(password)s, face_recognition = %(face_recognition)s

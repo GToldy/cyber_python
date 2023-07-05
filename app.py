@@ -40,6 +40,7 @@ def login():
 
 @app.route('/logout')
 def logout():
+    session.pop('user_id', None)
     session.pop('username', None)
     return redirect(url_for('index'))
 
@@ -47,22 +48,30 @@ def logout():
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     if request.method == 'POST':
-        user_controller.create_user(request.form)
-        return redirect(url_for('index'))
+        is_verified, flash_message = user_controller.create_user(request.form)
+        if is_verified:
+            flash(flash_message, 'info')
+            return redirect(url_for('index'))
+        flash(flash_message, 'error')
+        return redirect(url_for('registration'))
     return render_template('registration.html')
 
 
 @app.route('/profile/<int:user_id>')
 def user_profile(user_id):
-    user_data = user_controller.get_user_by_id(user_id)
-    return render_template('profile.html', user=user_data)
+    if 'username' in session:
+        user_data = user_controller.get_user_by_id(user_id)
+        return render_template('profile.html', user=user_data)
+    else:
+        flash('Please log in to see this profile', 'error')
+        return redirect(url_for('login'))
 
 
 @app.route('/profile/<int:user_id>/edit', methods=['GET', 'POST'])
 def edit_profile(user_id):
     user_data = user_controller.get_user_by_id(user_id)
     if request.method == 'POST':
-        is_verified, flash_message = verify_user_data(request.form)
+        is_verified, flash_message = verify_user_data(session, request.form)
         if is_verified:
             user_controller.update_user(user_id, request.form)
             flash(flash_message, 'info')
@@ -76,6 +85,8 @@ def edit_profile(user_id):
 @app.route('/profile/<int:user_id>/delete', methods=['POST'])
 def delete_profile(user_id):
     user_controller.delete_user(user_id)
+    session.pop('user_id', None)
+    session.pop('username', None)
     flash('User successfully deleted. Bye.')
     return redirect(url_for('index'))
 
