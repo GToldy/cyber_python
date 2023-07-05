@@ -2,22 +2,42 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <h1>Login</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <p class="flash-messages">
+                {% for category, message in messages %}
+                    <span class="flash-{{ category }}">{{ message }}</span>
+                {% endfor %}
+                <span data-flash-message-close onclick="document.querySelector('.flash-messages').style.display = 'none'">X</span>
+            </p>
+        {% endif %}
+    {% endwith %}
 
-    <form action="/login" method="POST">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <button type="submit" value="Login">Submit</button>
-        </div>
-        <div>
-            <button type="submit">Face</button>
-        </div>
-    </form>
+    <div class="login">
+        <h2>Login</h2>
+        <p>Please log in with your Face or enter your username and password!</p>
+        <form class="login-form" action="/login" method="POST">
+            <!--<div>
+                <img src="/static/img/webpage_images/video-call-cuate.png" width="200px" alt="">
+                <button class="button-submit" type="submit">Face</button>
+            </div>-->
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <button type="submit" value="Login">Submit</button>
+            </div>
+            <!--<div>
+                <button type="submit">Face</button>
+            </div>-->
+            <div>
+                <button class="button-submit" type="submit" value="Login">Login</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}

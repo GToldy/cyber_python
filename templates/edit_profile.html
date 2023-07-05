@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block title %}Edit profile{% endblock %}
+
+{% block content %}
+    <h1>Edit profile</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <p class="flash-messages">
+                {% for category, message in messages %}
+                    <span class="flash-{{ category }}">{{ message }}</span>
+                {% endfor %}
+                <span data-flash-message-close onclick="document.querySelector('.flash-messages').style.display = 'none'">X</span>
+            </p>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/profile/{{ user['id'] }}/edit" method="POST">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="{{ user['username'] }}">
+        </div>
+        <div>
+            <button type="submit">Update profile</button>
+        </div>
+    </form>
+    <form action="/profile/{{ user['id'] }}/edit" method="POST">
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div>
+            <label for="password_check">Password again:</label>
+            <input type="password" id="password_check" name="password_check">
+        </div>
+        <div>
+            <button type="submit">Update profile</button>
+        </div>
+    </form>
+    <form action="/profile/{{ user['id'] }}/edit" method="POST">
+        <div>
+            <span>Face recognition:</span>
+            <label for="face_recognition">Yes</label>
+            <input type="radio" id="face_recognition" name="face_recognition" value="True">
+            <label for="face_recognition">No</label>
+            <input type="radio" id="face_recognition" name="face_recognition" value="False">
+        </div>
+        <div>
+            <button type="submit">Update profile</button>
+        </div>
+    </form>
+    <form action="/profile/{{ user['id'] }}/delete" method="POST">
+        <button type="submit">Delete profile</button>
+    </form>
+{% endblock %}
