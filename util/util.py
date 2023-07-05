@@ -19,6 +19,8 @@ def verify_user_data(user_data):
     elif 'password_check' in user_data and user_data['password'] != user_data['password_check']:
         return False, 'Passwords do not mach. Try again'
     else:
+        if 'id' in user_data:
+            return True, 'Logged in successfully'
         return True, 'Registered successfully. Now you are logged in'
 
 

@@ -10,10 +10,13 @@
             <li>
                 <a class="button-52" href="{{ url_for('index') }}">Home</a>
             </li>
-            <li>
-                <a class="button-52" href="{{ url_for('face_recognition') }}">Face Recognition</a>
-            </li>
+{#            <li>#}
+{#                <a class="button-52" href="{{ url_for('face_recognition') }}">Face Recognition</a>#}
+{#            </li>#}
             {% if session['username'] %}
+                <li>
+                    <a class="button-52" href="{{ url_for('user_profile', user_id=session.user_id) }}">Profile</a>
+                </li>
                 <li>
                     <a class="button-52" href="{{ url_for('logout') }}">Log Out</a>
                 </li>
@@ -27,4 +30,7 @@
             {% endif %}
         </ul>
     </nav>
+    <div>
+        <span>{{ session.username }}</span>
+    </div>
 </header>

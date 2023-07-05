@@ -28,6 +28,7 @@ def login():
     if request.method == 'POST':
         is_verified, user_data, flash_message = verify_login_data(request.form)
         if is_verified:
+            session['user_id'] = user_data['id']
             session['username'] = user_data['username']
             flash(flash_message, 'info')
             return redirect(url_for('user_profile', user_id=user_data['id']))
@@ -64,7 +65,6 @@ def edit_profile(user_id):
         is_verified, flash_message = verify_user_data(request.form)
         if is_verified:
             user_controller.update_user(user_id, request.form)
-            print(request.form)
             flash(flash_message, 'info')
             return redirect(url_for('user_profile', user_id=user_id))
         else:
