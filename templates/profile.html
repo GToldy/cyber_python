@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <h1>{{ user['username'] }}</h1>
+    <a class="button-52" href="{{ url_for('edit_profile', user_id=user['id']) }}">Edit</a>
+{% endblock %}

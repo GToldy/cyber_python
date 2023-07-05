@@ -2,7 +2,17 @@
 {% block title %}Cyberry Home{% endblock %}
 
 {% block content %}
-    <br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <p class="flash-messages">
+                {% for category, message in messages %}
+                    <span class="flash-{{ category }}">{{ message }}</span>
+                {% endfor %}
+                <span data-flash-message-close onclick="document.querySelector('.flash-messages').style.display = 'none'">X</span>
+            </p>
+        {% endif %}
+    {% endwith %}
+
     <div class="intro">
         <div>
             <h2>Welcome to Cyberry!</h2>

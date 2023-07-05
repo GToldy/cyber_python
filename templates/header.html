@@ -7,15 +7,24 @@
             <h1>Cyberry</h1>
         </span>
         <ul>
-            <li class="button-52">
-                <a href="{{ url_for('index') }}">Home</a>
+            <li>
+                <a class="button-52" href="{{ url_for('index') }}">Home</a>
             </li>
-            <li class="button-52">
-                <a href="{{ url_for('login') }}">Log In</a>
+            <li>
+                <a class="button-52" href="{{ url_for('face_recognition') }}">Face Recognition</a>
             </li>
-            <li class="button-52">
-                <a href="{{ url_for('registration') }}">Sign Up</a>
-            </li>
+            {% if session['username'] %}
+                <li>
+                    <a class="button-52" href="{{ url_for('logout') }}">Log Out</a>
+                </li>
+            {% else %}
+                <li>
+                    <a class="button-52" href="{{ url_for('login') }}">Log In</a>
+                </li>
+                <li>
+                    <a class="button-52" href="{{ url_for('registration') }}">Sign Up</a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 </header>
