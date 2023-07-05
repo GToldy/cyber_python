@@ -64,6 +64,7 @@ def edit_profile(user_id):
         is_verified, flash_message = verify_user_data(request.form)
         if is_verified:
             user_controller.update_user(user_id, request.form)
+            print(request.form)
             flash(flash_message, 'info')
             return redirect(url_for('user_profile', user_id=user_id))
         else:

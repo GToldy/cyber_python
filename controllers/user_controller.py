@@ -29,10 +29,12 @@ def create_user(user_data):
 def update_user(user_id, new_data):
     old_data = manager.get_user_by_id(user_id)
     for key, value in new_data.items():
-        old_data[key] = value if value else old_data[key]
-    old_data["password"] = security.hash_password(old_data["password"])
+        if key == 'password':
+            old_data["password"] = security.hash_password(new_data["password"])
+        old_data[key] = value
     manager.update_user(user_id, old_data)
     session['username'] = old_data['username']
+
 
 def delete_user(user_id):
     manager.delete_user(user_id)
