@@ -1,7 +1,7 @@
 header {
     padding: 1rem 3rem;
     background-color: var(--color-secondary) !important;
-    position: sticky !important;
+    position: relative !important;
     top: 0 !important
 }
 
@@ -255,4 +255,47 @@ body {
 .remove-image:active {
   border: 0;
   transition: all .2s ease;
+}
+
+.intro {
+  padding: 1rem 3rem;
+  background-color: var(--color-secondary) !important;
+  position: sticky !important;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  margin-left: 40%;
+  margin-right: auto;
+}
+
+.button-submit {
+  font-size: 105%;
+}
+h2 {
+  font-size: 160%;
+}
+
+.login, .registration {
+  text-align: center;
+}
+
+.registration-form, .login-form {
+  padding: 1rem 3rem;
+  background-color: var(--color-secondary) !important;
+  #position: sticky !important;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+.footer-text {
+  white-space: nowrap;
+}
+
+footer {
+  bottom: 0 !important
 }

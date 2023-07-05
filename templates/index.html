@@ -13,8 +13,12 @@
         {% endif %}
     {% endwith %}
 
-    <h3>{{ 'No logged in user' if user is none else user }}</h3>
-    <div>
-
+    <div class="intro">
+        <div>
+            <h2>Welcome to Cyberry!</h2>
+            <p>Please be informed that you are able to register to the attendance site with your face and use your face as login to the page going forward.</p>
+            <p>This is a convenient way for administrators, teachers, employers, or event organizers to record and monitor attendance. By using an attendance site, organizations can streamline their attendance management processes, reduce manual paperwork, and ensure accurate and up-to-date attendance records. It can also help in identifying attendance patterns, tracking participation, and facilitating communication between organizers and attendees.</p>
+        </div>
+        <a href="/registration"><img src="static/img/webpage_images/remote-meeting-rafiki.png" alt="a graphic with a woman sitting by a table and talking people online" width="400"></a>
     </div>
 {% endblock %}

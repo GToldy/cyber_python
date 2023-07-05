@@ -2,8 +2,6 @@
 {% block title %}Registration{% endblock %}
 
 {% block content %}
-    <h1>Registration</h1>
-
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <p class="flash-messages">
@@ -15,8 +13,12 @@
         {% endif %}
     {% endwith %}
 
-    <form action="/registration" method="POST">
-        <div>
+    <div class="registration">
+        <h2>Registration</h2>
+        <p>Please enter your username and password <br>and select 'Face recognition' for face sign up option!</p>
+        <br>
+        <form class="registration-form" action="/registration" method="POST">
+            <div>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
         </div>
@@ -38,5 +40,6 @@
         <div>
             <button type="submit" value="Register">Register</button>
         </div>
-    </form>
+        </form>
+    </div>
 {% endblock %}
