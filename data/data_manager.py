@@ -13,6 +13,15 @@ def create_user(cursor, userdata):
 
 
 @connection_handler
+def create_face_data(cursor, user_data, face_data):
+    query = """
+        INSERT INTO "FaceData" (user_id, data)
+        VALUES (%(user_id)s, %(face_data)s)
+    """
+    cursor.execute(query, {'user_id': user_data['id'], 'face_data': face_data})
+
+
+@connection_handler
 def get_all_users(cursor):
     query = """
         SELECT * FROM "Users";
@@ -35,6 +44,17 @@ def get_user_by_id(cursor, user_id):
 def get_user_by_username(cursor, user_name):
     query = """
         SELECT * FROM "Users"
+        WHERE username = %(username)s
+    """
+    cursor.execute(query, {'username': user_name})
+    return cursor.fetchone()
+
+
+@connection_handler
+def get_all_user_data_by_username(cursor, user_name):
+    query = """
+        SELECT "Users".*, "FaceData".data FROM "Users"
+        LEFT JOIN "FaceData" on "Users".id = "FaceData".user_id
         WHERE username = %(username)s
     """
     cursor.execute(query, {'username': user_name})

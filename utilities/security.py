@@ -10,6 +10,3 @@ def hash_password(plain_text_password):
 def verify_password(plain_text_password, hashed_password):
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
-
-
-print(verify_password('a', '$2b$12$gFUNuYrP4Zq3fVxge1pdJeXzBigWYJNGY6DWmGFKPyzpSk91JGxiK'))

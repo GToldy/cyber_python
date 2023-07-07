@@ -38,4 +38,4 @@ ALTER TABLE ONLY "FaceData" ADD CONSTRAINT pk_facedata_id PRIMARY KEY (id);
 
 
 ALTER TABLE IF EXISTS "FaceData" ADD CONSTRAINT fk_users_id
-FOREIGN KEY (user_id) REFERENCES "Users" (id)
+FOREIGN KEY (user_id) REFERENCES "Users" (id) ON DELETE CASCADE;

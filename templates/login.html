@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'shared/layout.html' %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
@@ -17,10 +17,6 @@
         <h2>Login</h2>
         <p>Please log in with your Face or enter your username and password!</p>
         <form class="login-form" action="/login" method="POST">
-            <!--<div>
-                <img src="/static/img/webpage_images/video-call-cuate.png" width="200px" alt="">
-                <button class="button-submit" type="submit">Face</button>
-            </div>-->
             <div>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username">

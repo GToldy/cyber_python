@@ -1,6 +1,7 @@
 from flask import session, flash
 import data.data_manager as manager
-from util import util, security
+from utilities import util, security
+from utilities.face_encodings import pack_face_data, unpack_face_data, check_faces, encode_image
 
 
 def get_all_users():
@@ -15,8 +16,25 @@ def get_user_by_username(user_name):
     return manager.get_user_by_username(user_name)
 
 
+def check_if_face_data_is_user(username, face_data):
+    user_data = manager.get_all_user_data_by_username(username)
+    user_db_face_data = user_data['data']
+    user_face_data = unpack_face_data(user_db_face_data)
+    encoded_frame = encode_image(face_data)
+    print(len(user_face_data))
+    print(len(encoded_frame))
+    return check_faces([user_face_data], encoded_frame)[0], user_data, 'Logged in successfully'
+
+
 def check_if_user_exists(user_name):
     return manager.check_if_user_exists(user_name)
+
+
+def create_face_data(username, face_data):
+    user_data = manager.get_user_by_username(username)
+    face_encoding = pack_face_data(face_data)
+    manager.create_face_data(user_data, face_encoding)
+    return True, 'Successfully saved face data'
 
 
 def create_user(user_data):
@@ -29,9 +47,6 @@ def create_user(user_data):
             simple_user_data = util.unpacked_user_data(user_data)
             simple_user_data['password'] = security.hash_password(simple_user_data['password'])
             manager.create_user(simple_user_data)
-            user = manager.get_user_by_username(user_data['username'])
-            session['user_id'] = user['id']
-            session['username'] = simple_user_data['username']
             return True, flash_message
         else:
             return False, flash_message

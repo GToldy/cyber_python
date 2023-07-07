@@ -2,7 +2,7 @@
     <nav class="">
         <span id="site-logo" class="">
             <a href="{{ url_for('index') }}">
-                <img src="../static/img/webpage_images/logo/cyberry02.png" width="80%" />
+                <img src="../../static/img/webpage_images/logo/cyberry02.png" width="80%" />
             </a>
             <h1>Cyberry</h1>
         </span>
@@ -13,7 +13,7 @@
 {#            <li>#}
 {#                <a class="button-52" href="{{ url_for('face_recognition') }}">Face Recognition</a>#}
 {#            </li>#}
-            {% if session.username %}
+            {% if session.user_id %}
                 <li>
                     <a class="button-52" href="{{ url_for('user_profile', user_id=session.user_id) }}">Profile</a>
                 </li>
@@ -30,7 +30,7 @@
             {% endif %}
         </ul>
     </nav>
-    {% if session.username %}
+    {% if session.username and session.user_id %}
         <div id="user-header">
             <span id="username">{{ session.username }}</span>
         </div>

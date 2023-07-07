@@ -1,0 +1,31 @@
+{% extends 'shared/layout.html' %}
+{% block title %}Face capture{% endblock %}
+
+{% block script %}
+    <script src="../static/js/video_capture.js" defer></script>
+{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <p class="flash-messages">
+                {% for category, message in messages %}
+                    <span class="flash-{{ category }}">{{ message }}</span>
+                {% endfor %}
+                <span data-flash-message-close onclick="document.querySelector('.flash-messages').style.display = 'none'">X</span>
+            </p>
+        {% endif %}
+    {% endwith %}
+
+    <div class="registration">
+        <h2>Face capture</h2>
+        <br>
+        <div id="video-stream">
+            {% if session.login %}
+                <div class="button-52" id="check_face_data" data-username={{ session.username }}>Check face data</div>
+            {% elif session.register %}
+                <div class="button-52" id="register_face_data" data-username={{ session.username }}>Register face data</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

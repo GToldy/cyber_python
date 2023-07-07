@@ -334,3 +334,11 @@ footer {
     letter-spacing: 1px;
     margin: 1rem 0 .5rem;
 }
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}

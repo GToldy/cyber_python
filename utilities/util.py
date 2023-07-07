@@ -1,11 +1,17 @@
+import argparse
 from functools import wraps
 from flask import jsonify
 
 from controllers import user_controller
-from util.security import hash_password, verify_password
+from utilities.security import hash_password, verify_password
 
 
 def json_response(func):
+    """
+    Converts the returned dictionary into a JSON response
+    :param func:
+    :return:
+    """
     @wraps(func)
     def decorated_function(*args, **kwargs):
         return jsonify(func(*args, **kwargs))
@@ -47,3 +53,12 @@ def get_hashed_data(user_data_item):
     user_data_item = hash_password(user_data_item)
     return user_data_item
 
+
+def arg_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', '--ip', type=str, default='127.0.0.1', help='Ip address of the device')
+    parser.add_argument('-o', '--port', type=int, default=5000, help='Ephemeral port number of the '
+                                                                                    'server (1024 to 65535)')
+    parser.add_argument("-f", "--frame-count", type=int, default=32, help='# of frames used to construct the '
+                                                                          'background model')
+    return vars(parser.parse_args())
